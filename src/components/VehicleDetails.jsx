@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-const API = process.env.REACT_APP_API_URL ;
+const API = process.env.REACT_APP_API_URL;
 
 const VehicleDetails = () => {
   const { id } = useParams();
