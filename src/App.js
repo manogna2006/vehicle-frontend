@@ -62,7 +62,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/choose" element={<ChooseAction />} />
- <Route path="/add-vehicle" element={<AddVehicle onVehicleAdded={fetchVehicles} />} />        <Route path="/vehicles/:id" element={<VehicleDetails />} />
+ <Route path="/add-vehicle" element={<AddVehicle />} />       
+  <Route path="/vehicles/:id" element={<VehicleDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/about" element={<About />} />
 <Route path="/blog" element={<Blog />} />
