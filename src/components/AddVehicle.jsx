@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./AddVehicle.css";
-const API = process.env.REACT_APP_API_URL;
+const API = "https://vehicle-backend-82q6.onrender.com";
 
 
 

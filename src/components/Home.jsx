@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Home.css";
 
-const API = process.env.REACT_APP_API_URL;
+const API = "https://vehicle-backend-82q6.onrender.com";
 
 const Home = () => {
   const [vehicles, setVehicles] = useState([]);

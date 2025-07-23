@@ -16,7 +16,7 @@ import Blog from "./components/Blog";
 import EditVehicle from "./components/EditVehicle"; 
 import PaymentPage from "./components/PaymentPage";
 import './App.css';
-const API = process.env.REACT_APP_API_URL;
+const API = "https://vehicle-backend-82q6.onrender.com";
 
 
 
