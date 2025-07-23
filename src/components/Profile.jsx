@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 // Set your backend URL safely
-const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API = process.env.REACT_APP_API_URL ;
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);

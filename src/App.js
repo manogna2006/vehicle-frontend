@@ -16,7 +16,7 @@ import Blog from "./components/Blog";
 import EditVehicle from "./components/EditVehicle"; 
 import PaymentPage from "./components/PaymentPage";
 import './App.css';
-const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API = process.env.REACT_APP_API_URL;
 
 
 
