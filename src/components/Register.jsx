@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; 
 import "./Auth.css"; // ✅
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 const Register = () => {
   const [form, setForm] = useState({ username: "", email: "", password: "", role: "" });
@@ -23,7 +24,7 @@ const Register = () => {
   console.log("Form submitted:", form); // Debug
 
   try {
-    const res = await axios.post("http://localhost:5000/api/auth/register", form);
+    const res = await axios.post(`${API}/api/auth/register`, form);
     setMsg(res.data.msg);
     navigate("/login"); // redirect
   } catch (err) {

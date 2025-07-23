@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 const EditVehicle = () => {
   const { id } = useParams();
@@ -18,7 +20,7 @@ const EditVehicle = () => {
   useEffect(() => {
     const fetchVehicle = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/vehicles/${id}`);
+        const res = await axios.get(`${API}/api/vehicles/${id}`);
         const { title, type, description, price } = res.data;
         setForm({ title, type, description, price });
       } catch (err) {
@@ -36,7 +38,7 @@ const EditVehicle = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/vehicles/${id}`, form, {
+      await axios.put(`${API}/api/vehicles/${id}`, form, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

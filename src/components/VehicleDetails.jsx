@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 const VehicleDetails = () => {
   const { id } = useParams();
@@ -29,7 +30,7 @@ const VehicleDetails = () => {
 
   const fetchVehicle = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/vehicles/${id}`);
+      const res = await axios.get(`${API}/api/vehicles/${id}`);
       setVehicle(res.data);
     } catch (err) {
       console.error(err);
@@ -44,7 +45,7 @@ const VehicleDetails = () => {
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this vehicle?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/vehicles/${id}`, {
+      await axios.delete(`${API}/api/vehicles/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Deleted successfully!");
@@ -57,8 +58,7 @@ const VehicleDetails = () => {
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        `http://localhost:5000/api/vehicles/${id}/reviews`,
+      const res = await axios.post(`${API}/api/vehicles/${id}/reviews`,
         { rating, comment },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -89,14 +89,14 @@ const VehicleDetails = () => {
             vehicle.images.map((img, i) => (
               <img
                 key={i}
-                src={`http://localhost:5000/uploads/${img}`}
+src={`${API}/uploads/${img}`}
                 alt={`Vehicle ${i + 1}`}
               />
             ))
           ) : vehicle.image ? (
             <img
-              src={`http://localhost:5000/uploads/${vehicle.image}`}
-              alt="Vehicle"
+src={`${API}/uploads/${vehicle.image}`}       
+       alt="Vehicle"
             />
           ) : (
             <p>No Image</p>

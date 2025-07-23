@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+// Set your backend URL safely
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const token = localStorage.getItem("token");
@@ -8,41 +11,36 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/profile", {
+        const res = await axios.get(`${API}/api/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData(res.data);
-        
-
       } catch (err) {
         console.error("❌ Error fetching profile:", err);
       }
     };
 
     fetchProfile();
-  }, []);
+  }, [token]);
 
-  if (!userData) return <p>Loading profile...</p>;
+  if (!userData) return <p style={{ textAlign: "center", marginTop: "50px" }}>Loading profile...</p>;
 
   return (
     <div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
       {/* 👤 Avatar */}
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
-  <img
-  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-  alt="User Avatar"
-  style={{
-    borderRadius: "50%",
-    width: "120px",
-    height: "120px",
-    objectFit: "cover",
-    backgroundColor: "#eee"
-  }}
-/>
-
-
-</div>
-
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+          alt="User Avatar"
+          style={{
+            borderRadius: "50%",
+            width: "120px",
+            height: "120px",
+            objectFit: "cover",
+            backgroundColor: "#eee"
+          }}
+        />
+      </div>
 
       {/* 🧾 User Info */}
       <h2 style={{ textAlign: "center" }}>Welcome, {userData.username}</h2>
@@ -56,11 +54,11 @@ const Profile = () => {
 
       {/* 🚘 Uploaded Vehicles */}
       <h3>Your Uploaded Vehicles</h3>
-      {userData.uploadedVehicles.length === 0 ? (
+      {userData?.uploadedVehicles?.length === 0 ? (
         <p>You haven’t listed any vehicles yet.</p>
       ) : (
         <ul>
-          {userData.uploadedVehicles.map((v) => (
+          {userData?.uploadedVehicles?.map((v) => (
             <li key={v._id}>
               {v.title} - ₹{v.price}
             </li>

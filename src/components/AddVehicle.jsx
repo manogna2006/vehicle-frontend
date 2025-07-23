@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./AddVehicle.css";
+const API = process.env.REACT_APP_API_URL;
+
 
 
 function AddVehicle() {
@@ -34,7 +36,7 @@ function AddVehicle() {
     data.append("location",form.location);
 
     try {
-      await axios.post("http://localhost:5000/api/vehicles", data);
+await axios.post(`${API}/api/vehicles`, data);
       alert("Vehicle added successfully ✅");
       navigate("/home"); // ✅ Redirect to vehicle list
     } catch (err) {

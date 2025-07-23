@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 const Favorites = () => {
   const [vehicles, setVehicles] = useState([]);
   const [favorites, setFavorites] = useState(() => {
@@ -12,8 +14,7 @@ const Favorites = () => {
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/vehicles");
-        // Only keep vehicles that are favorited
+        const res = await axios.get(`${API}/api/vehicles`);
         const filtered = res.data.filter((v) => favorites.includes(v._id));
         setVehicles(filtered);
       } catch (err) {
@@ -58,7 +59,7 @@ const Favorites = () => {
                 >
                   {firstImage ? (
                     <img
-                      src={`http://localhost:5000/uploads/${firstImage}`}
+                      src={`${API}/uploads/${firstImage}`}
                       alt="Vehicle"
                       style={{
                         width: "100%",

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 const PaymentPage = () => {
   const { id } = useParams();
@@ -14,7 +16,7 @@ const PaymentPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/vehicles/${id}`)
+      .get(`${API}/api/vehicles/${id}`)
       .then((res) => setVehicle(res.data))
       .catch((err) => console.error("Failed to fetch vehicle:", err));
   }, [id]);

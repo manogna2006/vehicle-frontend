@@ -16,6 +16,8 @@ import Blog from "./components/Blog";
 import EditVehicle from "./components/EditVehicle"; 
 import PaymentPage from "./components/PaymentPage";
 import './App.css';
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 
 
@@ -31,7 +33,7 @@ function App() {
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/vehicles");
+        const res = await fetch(`${API}/api/vehicles`);
         const data = await res.json();
         setVehicles(data);
       } catch (err) {

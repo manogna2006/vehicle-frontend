@@ -4,6 +4,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Home.css";
 
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 const Home = () => {
   const [vehicles, setVehicles] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/vehicles");
+        const res = await axios.get(`${API}/api/vehicles`);
         setVehicles(res.data);
       } catch (err) {
         console.error("Failed to fetch vehicles:", err);
@@ -77,7 +79,7 @@ const Home = () => {
                 <Link to={`/vehicles/${v._id}`} className="card-link">
                   {firstImage ? (
                     <img
-                      src={`http://localhost:5000/uploads/${firstImage}`}
+                      src={`${API}/uploads/${firstImage}`}
                       alt={v.title}
                       className="vehicle-image"
                     />
@@ -92,23 +94,24 @@ const Home = () => {
                     <p><strong>Seller:</strong> {v.seller}</p>
                   </div>
                 </Link>
-             <Link to={`/vehicles/${v._id}`}>
-  <button
-    style={{
-      marginTop: "10px",
-      width: "100%",
-      padding: "10px",
-      backgroundColor: "#007bff",
-      color: "white",
-      border: "none",
-      borderRadius: "6px",
-      cursor: "pointer",
-      fontSize: "15px"
-    }}
-  >
-    View Details
-  </button>
-</Link>
+
+                <Link to={`/vehicles/${v._id}`}>
+                  <button
+                    style={{
+                      marginTop: "10px",
+                      width: "100%",
+                      padding: "10px",
+                      backgroundColor: "#007bff",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                      fontSize: "15px"
+                    }}
+                  >
+                    View Details
+                  </button>
+                </Link>
 
                 <button
                   onClick={() => toggleFavorite(v._id)}
