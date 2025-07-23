@@ -24,7 +24,7 @@ const Register = () => {
   console.log("Form submitted:", form); // Debug
 
   try {
-    const res = await axios.post(`${API}/api/auth/register`, form);
+    const res = await axios.post(`${API}/api/auth/register`, form, { withCredentials: true });
     setMsg(res.data.msg);
     navigate("/login"); // redirect
   } catch (err) {
