@@ -6,7 +6,7 @@ const API = process.env.REACT_APP_API_URL;
 
 
 
-function AddVehicle() {
+function AddVehicle({onVehicleAdded}) {
   const [form, setForm] = useState({
     title: "",
     type: "",
@@ -38,6 +38,7 @@ function AddVehicle() {
     try {
 await axios.post(`${API}/api/vehicles`, data);
       alert("Vehicle added successfully ✅");
+      if(onVehicleAdded) onVehicleAdded();
       navigate("/home"); // ✅ Redirect to vehicle list
     } catch (err) {
       console.error(err);
