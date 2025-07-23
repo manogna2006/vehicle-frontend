@@ -39,7 +39,8 @@ function AddVehicle({onVehicleAdded}) {
 await axios.post(`${API}/api/vehicles`, data);
       alert("Vehicle added successfully ✅");
       if(onVehicleAdded) onVehicleAdded();
-      navigate("/home"); // ✅ Redirect to vehicle list
+      navigate("/home"); 
+// ✅ Redirect to vehicle list
     } catch (err) {
       console.error(err);
       alert("❌ Failed to add vehicle");
